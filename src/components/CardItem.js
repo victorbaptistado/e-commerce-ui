@@ -1,7 +1,17 @@
-import { Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Divider, Heading, HStack, Image, Stack, StackDivider, Text, VStack } from '@chakra-ui/react'
-import React from 'react'
+import { Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, HStack, Image, Stack, Text } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import { getItem } from '../api/ItemsList';
 
-const CardItem = () => {
+
+const CardItem = ({itemId}) => {
+  const [item, setItem] = useState([]);
+
+  useEffect(() => {
+    console.log(itemId);
+    
+    getItem(itemId).then(data => setItem(data));
+  }, [itemId]);
+  
   return (
     <Card maxW='sm'>
       <CardBody>
@@ -11,18 +21,16 @@ const CardItem = () => {
           borderRadius='lg'
         />
         <Stack mt='6' spacing='3'>
-          <Heading size='md'>Item.Name</Heading>
+          <Heading size='md'>{item.name}</Heading>
           <Text>
-            This sofa is perfect for modern tropical spaces, baroque inspired
-            spaces, earthy toned spaces and for people who love a chic design with a
-            sprinkle of vintage design.
+            {item.description}
           </Text>
           <HStack justifyContent="space-evenly">
             <Text color='blue.600' fontSize='2xl'>
-              $450
+              {item.price}
             </Text>
             <Text color='blue.600' fontSize='2xl'>
-              Item.Quantity
+              {item.quantity}
             </Text>
           </HStack>
         </Stack>
