@@ -1,12 +1,14 @@
-const API_BASE_URL = "http://localhost:3000";
+import { API_BASE_URL } from ".";
+
+const items_URL = `${API_BASE_URL}/items`;
 
 export const getItems = async () => {
-  return fetch(`${API_BASE_URL}/items`)
+  return fetch(items_URL)
   .then(response => response.json()); 
 };
 
 export const getItem = async (id) => {
-  return fetch(`${API_BASE_URL}/items/${id}`)
+  return fetch(`${items_URL}/${id}`)
   .then(response => response.json()); 
 };
 

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { CgProfile } from 'react-icons/cg'
 import { ImHome } from 'react-icons/im'
 import { IoMdArrowRoundBack } from 'react-icons/io'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 
 const Navigation = () => {
 
@@ -12,28 +12,33 @@ const Navigation = () => {
 
   const home = "home";
   const profile = "profile";
-
+/*
   function handleClick(data) {
     setShowHome(data === home);
     setShowProfile(data === profile);
   }
   
+*/
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+  const isProfile = location.pathname === "/profile";
+
   
   return (
     <nav className="App-header">
-      {showHome &&
+      {isHome &&
         <HStack>
-          <NavLink to="/profile" onClick={() => handleClick(profile)} >
+          <NavLink to="/profile" >
             <CgProfile size={"3rem"}/>
           </NavLink>
         </HStack>
-          }
-      {showProfile &&
+      }
+      {isProfile &&
         <HStack>
-          <NavLink to="/" onClick={() => handleClick(home)}>
+          <NavLink to="/" >
             <IoMdArrowRoundBack size={"3rem"}/>
           </NavLink>
-          <NavLink to="/" onClick={() => handleClick(home)} >
+          <NavLink to="/" >
             <ImHome size={"3rem"}/>
           </NavLink>
         </HStack>
